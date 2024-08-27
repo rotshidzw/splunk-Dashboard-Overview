@@ -1,0 +1,283 @@
+
+<dashboard version="2" theme="light">
+    <label>Dynatrace Host Metrics</label>
+    <description></description>
+    <definition><![CDATA[
+{
+	"dataSources": {
+		"ds_SWTrmKR8": {
+			"type": "ds.search",
+			"options": {
+				"query": "sourcetype=_json\r\n| stats dc(entityId) as \"Total Hosts\"",
+				"queryParameters": {
+					"earliest": "0"
+				}
+			},
+			"name": "Table search"
+		},
+		"ds_VSCXeYFI": {
+			"type": "ds.search",
+			"options": {
+				"query": "sourcetype=_json\r\n| stats dc(entityId) as \"Total Hosts\""
+			},
+			"name": "Search_1"
+		},
+		"ds_yGk3waS6": {
+			"type": "ds.search",
+			"options": {
+				"query": "sourcetype=_json\r\n| stats count by osType\r\n"
+			},
+			"name": "Search_2"
+		},
+		"ds_nQwuzB0Y": {
+			"type": "ds.search",
+			"options": {
+				"query": "sourcetype=_json\r\n| stats avg(consumedHostUnits) as \"Average Consumed Host Units\"\r\n"
+			},
+			"name": "Search_3"
+		},
+		"ds_wN6lStU7": {
+			"type": "ds.search",
+			"options": {
+				"query": "sourcetype=_json\r\n| stats count by hypervisorType\r\n"
+			},
+			"name": "Search_4"
+		},
+		"ds_bj7dzsmM": {
+			"type": "ds.search",
+			"options": {
+				"query": "sourcetype=_json\r\n| sort -cpuCores\r\n| head 5\r\n| table displayName cpuCores\r\n"
+			},
+			"name": "Search_5"
+		},
+		"ds_7HXikSjB": {
+			"type": "ds.search",
+			"options": {
+				"query": "sourcetype=_json\r\n| table displayName lastSeenTimestamp\r\n| sort -lastSeenTimestamp"
+			},
+			"name": "Search_6"
+		},
+		"ds_wP5Rv6k9": {
+			"type": "ds.search",
+			"options": {
+				"query": "sourcetype=_json\r\n| stats count by paasMemoryLimit\r\n"
+			},
+			"name": "Search_7"
+		},
+		"ds_zUGLgdRr": {
+			"type": "ds.search",
+			"options": {
+				"query": "sourcetype=_json\r\n| stats count by tags{}.key\r\n"
+			},
+			"name": "Search_8"
+		}
+	},
+	"visualizations": {
+		"viz_ZJSsg3I6": {
+			"type": "splunk.singlevalue",
+			"dataSources": {
+				"primary": "ds_VSCXeYFI"
+			},
+			"title": "Total Number of Hosts",
+			"description": "This query counts the total number of unique hosts"
+		},
+		"viz_pmEo4ldn": {
+			"type": "splunk.pie",
+			"dataSources": {
+				"primary": "ds_yGk3waS6"
+			},
+			"title": "Hosts by OS Type",
+			"description": "A pie chart or bar chart displaying the distribution of hosts by OS type."
+		},
+		"viz_zGZ3rEO4": {
+			"type": "splunk.singlevalue",
+			"dataSources": {
+				"primary": "ds_nQwuzB0Y"
+			},
+			"containerOptions": {
+				"visibility": {}
+			},
+			"options": {
+				"numberPrecision": 6
+			},
+			"title": "Average Consumed Host Units",
+			"description": "This query calculates the average consumed host units across all hosts."
+		},
+		"viz_jVmwr4X1": {
+			"type": "splunk.bar",
+			"dataSources": {
+				"primary": "ds_wN6lStU7"
+			},
+			"title": "Hosts by Hypervisor Type",
+			"description": "This query counts the number of hosts grouped by hypervisor type."
+		},
+		"viz_Omz0i5J4": {
+			"type": "splunk.pie",
+			"dataSources": {
+				"primary": "ds_bj7dzsmM"
+			},
+			"containerOptions": {},
+			"showProgressBar": false,
+			"showLastUpdated": false,
+			"title": "Top 5 Hosts by CPU Cores",
+			"description": "This query lists the top 5 hosts based on the number of CPU cores."
+		},
+		"viz_tsEhjYAo": {
+			"type": "splunk.table",
+			"dataSources": {
+				"primary": "ds_7HXikSjB"
+			},
+			"containerOptions": {},
+			"showProgressBar": false,
+			"showLastUpdated": false,
+			"title": "Last Seen Hosts",
+			"description": "This query retrieves the last seen timestamps of all hosts, useful for monitoring their activity."
+		},
+		"viz_sjiDxFK6": {
+			"type": "splunk.bar",
+			"dataSources": {
+				"primary": "ds_wP5Rv6k9"
+			},
+			"title": "Memory Limit Distribution",
+			"description": "This query groups hosts based on their memory limits to see how they are allocated.",
+			"options": {},
+			"context": {},
+			"containerOptions": {},
+			"showProgressBar": false,
+			"showLastUpdated": false
+		},
+		"viz_Ntz0fgRM": {
+			"type": "splunk.pie",
+			"dataSources": {
+				"primary": "ds_zUGLgdRr"
+			},
+			"title": "Hosts with Tags",
+			"description": "This query counts how many hosts are tagged in your system."
+		}
+	},
+	"inputs": {
+		"input_global_trp": {
+			"type": "input.timerange",
+			"options": {
+				"token": "global_time",
+				"defaultValue": "-24h@h,now"
+			},
+			"title": "Global Time Range"
+		}
+	},
+	"layout": {
+		"type": "grid",
+		"options": {
+			"width": 1440,
+			"height": 960
+		},
+		"structure": [
+			{
+				"item": "viz_ZJSsg3I6",
+				"type": "block",
+				"position": {
+					"x": 0,
+					"y": 0,
+					"w": 360,
+					"h": 400
+				}
+			},
+			{
+				"item": "viz_Ntz0fgRM",
+				"type": "block",
+				"position": {
+					"x": 0,
+					"y": 400,
+					"w": 541,
+					"h": 400
+				}
+			},
+			{
+				"item": "viz_tsEhjYAo",
+				"type": "block",
+				"position": {
+					"x": 0,
+					"y": 800,
+					"w": 720,
+					"h": 400
+				}
+			},
+			{
+				"item": "viz_zGZ3rEO4",
+				"type": "block",
+				"position": {
+					"x": 360,
+					"y": 0,
+					"w": 360,
+					"h": 400
+				}
+			},
+			{
+				"item": "viz_Omz0i5J4",
+				"type": "block",
+				"position": {
+					"x": 541,
+					"y": 400,
+					"w": 899,
+					"h": 400
+				}
+			},
+			{
+				"item": "viz_jVmwr4X1",
+				"type": "block",
+				"position": {
+					"x": 720,
+					"y": 1000,
+					"w": 720,
+					"h": 200
+				}
+			},
+			{
+				"item": "viz_sjiDxFK6",
+				"type": "block",
+				"position": {
+					"x": 720,
+					"y": 800,
+					"w": 720,
+					"h": 200
+				}
+			},
+			{
+				"item": "viz_pmEo4ldn",
+				"type": "block",
+				"position": {
+					"x": 720,
+					"y": 0,
+					"w": 720,
+					"h": 400
+				}
+			}
+		],
+		"globalInputs": [
+			"input_global_trp"
+		]
+	},
+	"title": "Dynatrace Host Metrics",
+	"description": "",
+	"defaults": {
+		"dataSources": {
+			"ds.search": {
+				"options": {
+					"queryParameters": {
+						"latest": "$global_time.latest$",
+						"earliest": "$global_time.earliest$"
+					}
+				}
+			}
+		}
+	}
+}
+    ]]></definition>
+    <meta type="hiddenElements"><![CDATA[
+{
+	"hideEdit": false,
+	"hideOpenInSearch": false,
+	"hideExport": false
+}
+    ]]></meta>
+</dashboard>

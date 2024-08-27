@@ -1,0 +1,43 @@
+[app/ui]
+version = 9.3.0
+modtime = 1724749627.998726900
+
+[app/launcher]
+version = 9.3.0
+modtime = 1724749628.004727800
+
+[app/package/check_for_updates]
+version = 9.3.0
+modtime = 1724749628.018730100
+
+[nav/default]
+version = 9.3.0
+modtime = 1724757528.070066900
+
+[views/dynatrace_host_metrics]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 9.3.0
+modtime = 1724757194.135530200
+
+[views/price_and_sales_analysis]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 9.3.0
+modtime = 1724757199.062066500
+
+[views/sample_simple_dashboard_studio]
+access = read : [ * ], write : [ admin, power ]
+export = none
+owner = nobody
+version = 9.3.0
+modtime = 1724757203.645725400
+
+[views/web_traffic_and_performance_overview]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 9.3.0
+modtime = 1724757209.781994500

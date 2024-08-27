@@ -1,0 +1,347 @@
+
+<dashboard version="2" theme="light">
+    <label>Price and Sales Analysis</label>
+    <description></description>
+    <definition><![CDATA[
+{
+	"visualizations": {
+		"viz_O0j0rwV0": {
+			"type": "splunk.singlevalue",
+			"dataSources": {
+				"primary": "ds_6bOuZGyK"
+			},
+			"title": "Total Number of Products",
+			"description": "Count the total number of unique products",
+			"options": {
+				"unitPosition": "before"
+			}
+		},
+		"viz_OVLM6zM4": {
+			"type": "splunk.singlevalue",
+			"dataSources": {
+				"primary": "ds_XYggVI1a"
+			},
+			"title": "Total Sales Revenue",
+			"description": "Similar to the product count, a Single Value chart will highlight the total revenue, making it easy to see at a glance"
+		},
+		"viz_aTqFgVab": {
+			"type": "splunk.bar",
+			"dataSources": {
+				"primary": "ds_mtp57VaY"
+			},
+			"title": "Average Sale Price by Product",
+			"description": "A Bar Chart is ideal for comparing the average sale prices across different products. Each bar represents a product, and the height indicates its average price"
+		},
+		"viz_WwMDwPXY": {
+			"type": "splunk.column",
+			"dataSources": {
+				"primary": "ds_8t6kyMI9"
+			},
+			"title": "Products with a Discount",
+			"description": "Find products where the sale price is less than the original price"
+		},
+		"viz_Elk6TINM": {
+			"type": "splunk.pie",
+			"dataSources": {
+				"primary": "ds_KSdkx3c8"
+			},
+			"title": "Products Grouped by Price Range",
+			"description": "This visually shows the distribution of products across different price ranges."
+		},
+		"viz_6HMV8xf0": {
+			"type": "splunk.column",
+			"options": {
+				"seriesColors": [
+					"#f1813f",
+					"#009CEB",
+					"#00CDAF",
+					"#DD9900",
+					"#FF677B",
+					"#CB2196",
+					"#813193",
+					"#0051B5",
+					"#008C80",
+					"#99B100",
+					"#FFA476",
+					"#FF6ACE",
+					"#AE8CFF",
+					"#00689D",
+					"#00490A",
+					"#465D00",
+					"#9D6300",
+					"#F6540B",
+					"#FF969E",
+					"#E47BFE"
+				]
+			},
+			"dataSources": {
+				"primary": "ds_TZp7ZZkR"
+			},
+			"title": "Average Sale Price by Product",
+			"description": "Determine the average sale price for each product"
+		},
+		"viz_nU2l0itM": {
+			"type": "splunk.table",
+			"options": {},
+			"dataSources": {
+				"primary": "ds_KaQPw7li"
+			}
+		},
+		"viz_L6QgUPKw": {
+			"type": "splunk.table",
+			"dataSources": {
+				"primary": "ds_PT3Dk6Uj"
+			},
+			"title": "Products with a Discount",
+			"description": "Find products where the sale price is less than the original price"
+		},
+		"viz_B5zNk9IB": {
+			"type": "splunk.pie",
+			"dataSources": {
+				"primary": "ds_RIQTFEu4"
+			},
+			"title": "Top 5 Most Expensive Products",
+			"description": "Identify the top 5 most expensive products based on the original price"
+		},
+		"viz_A4IEkuZ8": {
+			"type": "splunk.line",
+			"dataSources": {
+				"primary": "ds_SaBM8wEV"
+			},
+			"title": "Revenue by Product Category",
+			"description": "Group products by aCode (or any other relevant field) and calculate the total revenue"
+		}
+	},
+	"dataSources": {
+		"ds_6bOuZGyK": {
+			"type": "ds.search",
+			"options": {
+				"query": "sourcetype=csv\r\n| stats dc(productId) as \"Total Products\""
+			},
+			"name": "Search_1"
+		},
+		"ds_XYggVI1a": {
+			"type": "ds.search",
+			"options": {
+				"query": "sourcetype=csv\r\n| eval revenue=sale_price\r\n| stats sum(revenue) as \"Total Sales Revenue\""
+			},
+			"name": "Search_2"
+		},
+		"ds_mtp57VaY": {
+			"type": "ds.search",
+			"options": {
+				"query": " sourcetype=csv\r\n| stats avg(sale_price) as \"Average Sale Price\" by product_name\r\n"
+			},
+			"name": "Search_3"
+		},
+		"ds_8t6kyMI9": {
+			"type": "ds.search",
+			"options": {
+				"query": "sourcetype=csv\r\n| where sale_price < price\r\n| eval timestamp=strftime(now(), \"%Y-%m-%d %H:%M:%S\")\r\n| table timestamp product_name price sale_price"
+			},
+			"name": "Search_4"
+		},
+		"ds_KSdkx3c8": {
+			"type": "ds.search",
+			"options": {
+				"query": "sourcetype=csv\r\n| eval price_range=case(sale_price < 10, \"Low\", sale_price >= 10 AND sale_price < 30, \"Medium\", sale_price >= 30, \"High\")\r\n| stats count by price_range"
+			},
+			"name": "Search_5"
+		},
+		"ds_cfLe96Gd": {
+			"type": "ds.search",
+			"options": {
+				"query": "sourcetype=csv\r\n| sort -price\r\n| head 5\r\n| eval time=strftime(now(), \"%Y-%m-%d %H:%M:%S\")\r\n| table time product_name price\r\n"
+			},
+			"name": "Search_6"
+		},
+		"ds_TZp7ZZkR": {
+			"type": "ds.search",
+			"options": {
+				"query": "sourcetype=csv\r\n| stats avg(sale_price) as \"Average Sale Price\" by product_name"
+			},
+			"name": "Search_7"
+		},
+		"ds_KaQPw7li": {
+			"type": "ds.search",
+			"options": {
+				"query": "sourcetype=csv\r\n| eval sale_price=tonumber(sale_price), price=tonumber(price)\r\n| eval time=strftime(now(), \"%Y-%m-%d %H:%M:%S\")\r\n| where sale_price < price\r\n| table time product_name price sale_price"
+			},
+			"name": "Search_8"
+		},
+		"ds_PT3Dk6Uj": {
+			"type": "ds.search",
+			"options": {
+				"query": "sourcetype=csv\r\n| eval price=tonumber(price)\r\n| sort -price\r\n| head 5\r\n| table product_name price"
+			},
+			"name": "Search_9"
+		},
+		"ds_lwWnTVrf": {
+			"type": "ds.search",
+			"options": {
+				"query": "sourcetype=csv\r\n| eval price_range=case(sale_price < 8, \"Low\", sale_price >= 10 AND sale_price < 30, \"Medium\", sale_price >= 30, \"High\")\r\n| stats count by price_range"
+			},
+			"name": "Search_10"
+		},
+		"ds_RIQTFEu4": {
+			"type": "ds.search",
+			"options": {
+				"query": "sourcetype=csv\r\n| sort -price\r\n| head 5\r\n| table  product_name price"
+			},
+			"name": "Search_11"
+		},
+		"ds_SaBM8wEV": {
+			"type": "ds.search",
+			"options": {
+				"query": "sourcetype=csv\r\n| stats sum(sale_price) as \"Total Revenue\" by Code"
+			},
+			"name": "Search_12"
+		}
+	},
+	"defaults": {
+		"dataSources": {
+			"ds.search": {
+				"options": {
+					"queryParameters": {
+						"latest": "$global_time.latest$",
+						"earliest": "$global_time.earliest$"
+					}
+				}
+			}
+		}
+	},
+	"inputs": {
+		"input_global_trp": {
+			"type": "input.timerange",
+			"options": {
+				"token": "global_time",
+				"defaultValue": "-24h@h,now"
+			},
+			"title": "Global Time Range"
+		}
+	},
+	"layout": {
+		"type": "absolute",
+		"options": {
+			"width": 5455,
+			"height": 3960,
+			"display": "fit-to-width"
+		},
+		"structure": [
+			{
+				"item": "viz_O0j0rwV0",
+				"type": "block",
+				"position": {
+					"x": 150,
+					"y": 20,
+					"w": 1370,
+					"h": 680
+				}
+			},
+			{
+				"item": "viz_OVLM6zM4",
+				"type": "block",
+				"position": {
+					"x": 1980,
+					"y": 30,
+					"w": 1570,
+					"h": 750
+				}
+			},
+			{
+				"item": "viz_aTqFgVab",
+				"type": "block",
+				"position": {
+					"x": 3880,
+					"y": 170,
+					"w": 1570,
+					"h": 1390
+				}
+			},
+			{
+				"item": "viz_WwMDwPXY",
+				"type": "block",
+				"position": {
+					"x": 1720,
+					"y": 800,
+					"w": 2100,
+					"h": 780
+				}
+			},
+			{
+				"item": "viz_Elk6TINM",
+				"type": "block",
+				"position": {
+					"x": 3060,
+					"y": 2660,
+					"w": 2310,
+					"h": 1310
+				}
+			},
+			{
+				"item": "viz_6HMV8xf0",
+				"type": "block",
+				"position": {
+					"x": 130,
+					"y": 750,
+					"w": 1490,
+					"h": 850
+				}
+			},
+			{
+				"item": "viz_nU2l0itM",
+				"type": "block",
+				"position": {
+					"x": 120,
+					"y": 1630,
+					"w": 1350,
+					"h": 1000
+				}
+			},
+			{
+				"item": "viz_L6QgUPKw",
+				"type": "block",
+				"position": {
+					"x": 1800,
+					"y": 1680,
+					"w": 1520,
+					"h": 910
+				}
+			},
+			{
+				"item": "viz_B5zNk9IB",
+				"type": "block",
+				"position": {
+					"x": 90,
+					"y": 2670,
+					"w": 2620,
+					"h": 1260
+				}
+			},
+			{
+				"item": "viz_A4IEkuZ8",
+				"type": "block",
+				"position": {
+					"x": 3420,
+					"y": 1660,
+					"w": 2020,
+					"h": 900
+				}
+			}
+		],
+		"globalInputs": [
+			"input_global_trp"
+		]
+	},
+	"description": "",
+	"title": "Price and Sales Analysis"
+}
+    ]]></definition>
+    <meta type="hiddenElements"><![CDATA[
+{
+	"hideEdit": false,
+	"hideOpenInSearch": false,
+	"hideExport": false
+}
+    ]]></meta>
+</dashboard>

@@ -1,0 +1,6 @@
+<nav search_view="search">
+  <view name="web_traffic_and_performance_overview" default='true' />
+  <view name="search"  />
+  <view name="analytics_workspace" />
+  <view name="dashboards"  />
+</nav>

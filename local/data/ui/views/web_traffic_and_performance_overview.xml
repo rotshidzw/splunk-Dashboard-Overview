@@ -1,0 +1,344 @@
+
+<dashboard version="2" theme="light">
+    <label>Web Traffic and Performance Overview</label>
+    <description></description>
+    <definition><![CDATA[
+{
+	"dataSources": {
+		"ds_E079himc": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=\"web\" \r\n| timechart span=1h count by clientip",
+				"queryParameters": {
+					"earliest": "0"
+				}
+			},
+			"name": "Area chart search"
+		},
+		"ds_frhJCRQ8": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=\"web\"  \r\n| top clientip"
+			},
+			"name": "Search_1"
+		},
+		"ds_HhAxEILt": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=web\r\n| stats count by method"
+			},
+			"name": "Search_2"
+		},
+		"ds_QAzzwhkY": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=web\r\n| top productId"
+			},
+			"name": "Search_3"
+		},
+		"ds_dV1g9yzo": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=web\r\n| top categoryId"
+			},
+			"name": "Search_4"
+		},
+		"ds_dqhPPpxX": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=web \r\n| stats count by status"
+			},
+			"name": "Search_5"
+		},
+		"ds_jbYZimBZ": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=web status>=400 \n| timechart span=1h count by status"
+			},
+			"name": "Search_6"
+		},
+		"ds_mjGMoaov": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=web \r\n| top referer"
+			},
+			"name": "Search_7"
+		},
+		"ds_MVCd9k6I": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=web \r\n| stats count by useragent"
+			},
+			"name": "Search_8"
+		},
+		"ds_s1dCObmr": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=web\r\n| stats avg(req_time) by uri"
+			},
+			"name": "Search_9"
+		}
+	},
+	"visualizations": {
+		"viz_Fc2RZ53W": {
+			"type": "splunk.area",
+			"options": {
+				"yAxisAbbreviation": "auto",
+				"y2AxisAbbreviation": "auto",
+				"showRoundedY2AxisLabels": false,
+				"legendTruncation": "ellipsisMiddle",
+				"showY2MajorGridLines": true,
+				"xAxisLabelRotation": 0,
+				"xAxisTitleVisibility": "show",
+				"yAxisTitleVisibility": "show",
+				"y2AxisTitleVisibility": "show",
+				"yAxisScale": "linear",
+				"showOverlayY2Axis": false,
+				"nullValueDisplay": "gaps",
+				"dataValuesDisplay": "off",
+				"stackMode": "auto",
+				"showSplitSeries": false,
+				"showIndependentYRanges": false,
+				"legendMode": "standard",
+				"legendDisplay": "right"
+			},
+			"dataSources": {
+				"primary": "ds_E079himc"
+			},
+			"title": "Request Volume Over Time",
+			"description": "Tracks hourly web request counts segmented by client IP."
+		},
+		"viz_Vo8KoXHJ": {
+			"type": "splunk.column",
+			"dataSources": {
+				"primary": "ds_frhJCRQ8"
+			},
+			"title": "Top Client IPs",
+			"description": "Displays the most active client IPs by request count."
+		},
+		"viz_ZzrrfrIU": {
+			"type": "splunk.pie",
+			"dataSources": {
+				"primary": "ds_HhAxEILt"
+			},
+			"containerOptions": {},
+			"showProgressBar": false,
+			"showLastUpdated": false,
+			"title": "HTTP Methods Distribution",
+			"description": "Shows the distribution of HTTP methods used in web requests."
+		},
+		"viz_vfRFIyPL": {
+			"type": "splunk.bar",
+			"dataSources": {
+				"primary": "ds_QAzzwhkY"
+			},
+			"title": "Most Accessed Products",
+			"description": "Highlights the most frequently accessed product IDs."
+		},
+		"viz_Svv2bKGs": {
+			"type": "splunk.column",
+			"dataSources": {
+				"primary": "ds_dV1g9yzo"
+			},
+			"title": "Category Popularity",
+			"description": "Displays the most visited categories by request count."
+		},
+		"viz_6CiN12L2": {
+			"type": "splunk.line",
+			"dataSources": {
+				"primary": "ds_dqhPPpxX"
+			},
+			"title": "HTTP Status Codes",
+			"description": "Monitors the count of HTTP status codes across requests."
+		},
+		"viz_bWogglE2": {
+			"type": "splunk.parallelcoordinates",
+			"dataSources": {
+				"primary": "ds_jbYZimBZ"
+			},
+			"containerOptions": {},
+			"showProgressBar": false,
+			"showLastUpdated": false,
+			"title": "HTTP Methods Distribution",
+			"description": "Shows the distribution of HTTP methods used in web requests."
+		},
+		"viz_d3uT1V9O": {
+			"type": "splunk.column",
+			"dataSources": {
+				"primary": "ds_mjGMoaov"
+			},
+			"containerOptions": {},
+			"showProgressBar": false,
+			"showLastUpdated": false,
+			"title": "Top Referrers",
+			"description": "Shows the most common referring domains."
+		},
+		"viz_X78Awfrc": {
+			"type": "splunk.column",
+			"dataSources": {
+				"primary": "ds_MVCd9k6I"
+			},
+			"containerOptions": {},
+			"showProgressBar": false,
+			"showLastUpdated": false,
+			"title": "User-Agent Distribution",
+			"description": "Analyzes the distribution of user agents in web requests."
+		},
+		"viz_tHN0Zb2d": {
+			"type": "splunk.events",
+			"dataSources": {
+				"primary": "ds_s1dCObmr"
+			},
+			"containerOptions": {},
+			"showProgressBar": false,
+			"showLastUpdated": false,
+			"title": "Average Response Time by URI",
+			"description": "Compares average response times for different URIs."
+		}
+	},
+	"inputs": {
+		"input_global_trp": {
+			"type": "input.timerange",
+			"options": {
+				"token": "global_time",
+				"defaultValue": "-24h@h,now"
+			},
+			"title": "Global Time Range"
+		}
+	},
+	"layout": {
+		"type": "grid",
+		"options": {
+			"width": 1440,
+			"height": 960
+		},
+		"structure": [
+			{
+				"item": "viz_Fc2RZ53W",
+				"type": "block",
+				"position": {
+					"x": 0,
+					"y": 0,
+					"w": 720,
+					"h": 250
+				}
+			},
+			{
+				"item": "viz_ZzrrfrIU",
+				"type": "block",
+				"position": {
+					"x": 0,
+					"y": 250,
+					"w": 720,
+					"h": 400
+				}
+			},
+			{
+				"item": "viz_Svv2bKGs",
+				"type": "block",
+				"position": {
+					"x": 0,
+					"y": 650,
+					"w": 720,
+					"h": 400
+				}
+			},
+			{
+				"item": "viz_bWogglE2",
+				"type": "block",
+				"position": {
+					"x": 0,
+					"y": 1050,
+					"w": 720,
+					"h": 400
+				}
+			},
+			{
+				"item": "viz_X78Awfrc",
+				"type": "block",
+				"position": {
+					"x": 0,
+					"y": 1450,
+					"w": 720,
+					"h": 400
+				}
+			},
+			{
+				"item": "viz_tHN0Zb2d",
+				"type": "block",
+				"position": {
+					"x": 720,
+					"y": 1450,
+					"w": 720,
+					"h": 400
+				}
+			},
+			{
+				"item": "viz_Vo8KoXHJ",
+				"type": "block",
+				"position": {
+					"x": 720,
+					"y": 0,
+					"w": 720,
+					"h": 250
+				}
+			},
+			{
+				"item": "viz_vfRFIyPL",
+				"type": "block",
+				"position": {
+					"x": 720,
+					"y": 250,
+					"w": 720,
+					"h": 400
+				}
+			},
+			{
+				"item": "viz_6CiN12L2",
+				"type": "block",
+				"position": {
+					"x": 720,
+					"y": 650,
+					"w": 720,
+					"h": 400
+				}
+			},
+			{
+				"item": "viz_d3uT1V9O",
+				"type": "block",
+				"position": {
+					"x": 720,
+					"y": 1050,
+					"w": 720,
+					"h": 400
+				}
+			}
+		],
+		"globalInputs": [
+			"input_global_trp"
+		]
+	},
+	"title": "Web Traffic and Performance Overview",
+	"description": "",
+	"defaults": {
+		"dataSources": {
+			"ds.search": {
+				"options": {
+					"queryParameters": {
+						"latest": "$global_time.latest$",
+						"earliest": "$global_time.earliest$"
+					}
+				}
+			}
+		}
+	}
+}
+    ]]></definition>
+    <meta type="hiddenElements"><![CDATA[
+{
+	"hideEdit": false,
+	"hideOpenInSearch": false,
+	"hideExport": false
+}
+    ]]></meta>
+</dashboard>
