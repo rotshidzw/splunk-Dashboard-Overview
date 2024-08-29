@@ -1,0 +1,17 @@
+Code,"_raw","_time",eventtype,host,index,linecount,price,productId,"product_name",punct,"sale_price",source,sourcetype,"splunk_server","splunk_server_group",tag,"tag::eventtype","tag::sourcetype",timestamp
+P,"SF-BVS-01,Pony Run,49.99,41.99,P","2024-08-14T12:08:57.000+0200",,prices,main,1,"49.99","SF-BVS-01","Pony Run","--,_,.,.,","41.99","prices.csv",csv,"DESKTOP-NEC1G1M",,,,,none
+O,"SF-BVS-G01,Grand Theft Scooter,26.99,21.99,O ","2024-08-14T12:08:57.000+0200",,prices,main,1,"26.99","SF-BVS-G01","Grand Theft Scooter","--,__,.,.,_","21.99","prices.csv",csv,"DESKTOP-NEC1G1M",,,,,none
+N,"WC-SH-A02,Fire Resistance Suit of Provolone,3.99,1.99,N","2024-08-14T12:08:57.000+0200",,prices,main,1,"3.99","WC-SH-A02","Fire Resistance Suit of Provolone","--,____,.,.,","1.99","prices.csv",csv,"DESKTOP-NEC1G1M",,,,,none
+M,"WC-SH-A01,Holy Blade of Gouda,5.99,2.99,M","2024-08-14T12:08:57.000+0200",,prices,main,1,"5.99","WC-SH-A01","Holy Blade of Gouda","--,___,.,.,","2.99","prices.csv",csv,"DESKTOP-NEC1G1M",,,,,none
+L,"SC-MG-G10,SIM Cubicle,19.99,16.99,L","2024-08-14T12:08:57.000+0200",,prices,main,1,"19.99","SC-MG-G10","SIM Cubicle","--,_,.,.,","16.99","prices.csv",csv,"DESKTOP-NEC1G1M",,,,,none
+K,"BS-AG-G09,Benign Space Debris,24.99,19.99,K","2024-08-14T12:08:57.000+0200",,prices,main,1,"24.99","BS-AG-G09","Benign Space Debris","--,__,.,.,","19.99","prices.csv",csv,"DESKTOP-NEC1G1M",,,,,none
+J,"FI-AG-G08,Orvil the Wolverine,39.99,24.99,J","2024-08-14T12:08:57.000+0200",,prices,main,1,"39.99","FI-AG-G08","Orvil the Wolverine","--,__,.,.,","24.99","prices.csv",csv,"DESKTOP-NEC1G1M",,,,,none
+I,"MB-AG-T01,Manganiello Bros. Tee,9.99,6.99,I","2024-08-14T12:08:57.000+0200",,prices,main,1,"9.99","MB-AG-T01","Manganiello Bros. Tee","--,_._,.,.,","6.99","prices.csv",csv,"DESKTOP-NEC1G1M",,,,,none
+H,"MB-AG-G07,Manganiello Bros.,39.99,24.99,H","2024-08-14T12:08:57.000+0200",,prices,main,1,"39.99","MB-AG-G07","Manganiello Bros.","--,_.,.,.,","24.99","prices.csv",csv,"DESKTOP-NEC1G1M",,,,,none
+G,"CU-PG-G06,Curling 2014,19.99,16.99,G","2024-08-14T12:08:57.000+0200",,prices,main,1,"19.99","CU-PG-G06","Curling 2014","--,_,.,.,","16.99","prices.csv",csv,"DESKTOP-NEC1G1M",,,,,none
+F,"PZ-SG-G05,Puppies vs. Zombies,4.99,1.99,F","2024-08-14T12:08:57.000+0200",,prices,main,1,"4.99","PZ-SG-G05","Puppies vs. Zombies","--,_._,.,.,","1.99","prices.csv",csv,"DESKTOP-NEC1G1M",,,,,none
+E,"WC-SH-T02,World of Cheese Tee,9.99,6.99,E","2024-08-14T12:08:57.000+0200",,prices,main,1,"9.99","WC-SH-T02","World of Cheese Tee","--,___,.,.,","6.99","prices.csv",csv,"DESKTOP-NEC1G1M",,,,,none
+D,"WC-SH-G04,World of Cheese,24.99,19.99,D","2024-08-14T12:08:57.000+0200",,prices,main,1,"24.99","WC-SH-G04","World of Cheese","--,__,.,.,","19.99","prices.csv",csv,"DESKTOP-NEC1G1M",,,,,none
+C,"FS-SG-G03,Final Sequel,24.99,16.99,C","2024-08-14T12:08:57.000+0200",,prices,main,1,"24.99","FS-SG-G03","Final Sequel","--,_,.,.,","16.99","prices.csv",csv,"DESKTOP-NEC1G1M",,,,,none
+B,"DC-SG-G02,Dream Crusher,39.99,24.99,B","2024-08-14T12:08:57.000+0200",,prices,main,1,"39.99","DC-SG-G02","Dream Crusher","--,_,.,.,","24.99","prices.csv",csv,"DESKTOP-NEC1G1M",,,,,none
+A,"DB-SG-G01,Mediocre Kingdoms,24.99,19.99,A","2024-08-14T12:08:57.000+0200",,prices,main,1,"24.99","DB-SG-G01","Mediocre Kingdoms","--,_,.,.,","19.99","prices.csv",csv,"DESKTOP-NEC1G1M",,,,,none
